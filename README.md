@@ -2,7 +2,7 @@
 
 アニメーション機能付きのラインチャート
 
-+ リサイズ二対応
++ リサイズに対応
 + axisの変化に対応
 
 ## インストール
@@ -61,13 +61,12 @@ const chartContainerId = 'myChart';
 const chartOptions = {
   dataUrl: './data/example.csv', // データのURL (必須)
   series: [ // データ系列の定義 (必須)
-    { key: 'USA', label: 'USA', color: '#e41a1c' },
-    { key: 'China', label: 'China', color: '#377eb8' },
-    { key: 'Japan', label: 'Japan', color: '#4daf4a' },
-    { key: 'Germany', label: 'Germany', color: '#984ea3' }
+    { key: 'イギリス', label: 'イギリス', color: '#e41a1c' },
+    { key: 'カナダ', label: 'カナダ', color: '#377eb8' },
+    { key: '米国', label: '米国', color: '#4daf4a' },
   ],
-  xDomain: [2000, 2023], // X軸の範囲 (任意)
-  yDomain: [0, 220]      // Y軸の範囲 (任意)
+  xDomain: [1990, 2023], // X軸の範囲 (任意)
+  yDomain: [0, 225000]      // Y軸の範囲 (任意)
 };
 
 // チャートインスタンスを作成
@@ -82,12 +81,16 @@ lineChart.init();
 データは`year`, `key`, `value`のカラムを持つCSV形式で用意します。`key`は`series`オプションで定義した`key`と一致する必要があります。
 
 ```csv
-year,key,value
-2020,USA,100
-2020,China,120
-2021,USA,110
-2021,China,130
-...
+key,ISO,year,value
+イギリス,GB,1992,56.0005285
+イギリス,GB,1993,619.9407226
+イギリス,GB,1994,869.8935275
+カナダ,CA,1990,40690.17589
+カナダ,CA,1991,47685.56967
+カナダ,CA,1992,57897.47406
+米国,US,1990,2422.919766
+米国,US,1991,3659.795321
+米国,US,1992,6124.419544
 ```
 
 ### 4. 公開メソッド
@@ -111,8 +114,8 @@ lineChart.series.forEach((s, i) => {
 `resetLine(lineKey)`または`resetAllLine()`で、ラインを非表示状態に戻します。
 
 ```javascript
-// Chinaのラインをリセット
-lineChart.resetLine('China');
+// イギリスのラインをリセット
+lineChart.resetLine('イギリス');
 
 // すべてのラインをリセット
 lineChart.resetAllLine();
