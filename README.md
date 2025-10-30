@@ -5,6 +5,10 @@
 + リサイズに対応
 + axisの変化に対応
 
+# デモ
+https://shimizu.github.io/animationLineChart/
+
+
 ## インストール
 
 ```bash
