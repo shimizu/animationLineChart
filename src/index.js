@@ -28,4 +28,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             lineChart.animateLine(s.key, { delay: i * 500, duration: 1000 });
         });
     });
+
+    const toggleXButton = document.getElementById('toggleX');
+    const toggleYButton = document.getElementById('toggleY');
+
+    let xState = 'default';
+    let yState = 'default';
+
+    const xDomains = {
+        default: [2000, 2023],
+        zoomed: [2010, 2020]
+    };
+
+    const yDomains = {
+        default: [0, 220],
+        zoomed: [50, 150]
+    };
+
+    toggleXButton.addEventListener('click', () => {
+        xState = xState === 'default' ? 'zoomed' : 'default';
+        lineChart.setAxisRanges({ xDomain: xDomains[xState] });
+    });
+
+    toggleYButton.addEventListener('click', () => {
+        yState = yState === 'default' ? 'zoomed' : 'default';
+        lineChart.setAxisRanges({ yDomain: yDomains[yState] });
+    });
 });

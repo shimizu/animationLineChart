@@ -16,6 +16,7 @@ export default class AnimationLineChart {
     this.data = null;
     this.svg = null;
     this.g = null; // チャート要素を格納するSVGグループ
+    this.linesGroup = null; // ラインを格納するSVGグループ
 
     // スケール
     this.xScale = null;
@@ -108,6 +109,12 @@ export default class AnimationLineChart {
     this.g = this.svg.append('g')
       .attr('transform', `translate(${this.config.margin.left},${this.config.margin.top})`);
 
+    // Add a clip-path
+    this.svg.append("defs").append("clipPath")
+        .attr("id", "clip")
+      .append("rect")
+        .attr("width", width)
+        .attr("height", height);
 
     // X軸とY軸のスケールを設定
     this.xScale = d3.scaleLinear()
@@ -140,6 +147,10 @@ export default class AnimationLineChart {
 
     this.adjustTicks();
 
+    // Create a group for the lines and apply the clip-path
+    this.linesGroup = this.g.append('g')
+      .attr('clip-path', 'url(#clip)');
+
     // 各データ系列のラインを描画
     this.series.forEach(s => {
       const line = d3.line()
@@ -148,7 +159,7 @@ export default class AnimationLineChart {
         .y(d => this.yScale(d[s.key]))
         .curve(d3.curveMonotoneX);
 
-      const path = this.g.append('path')
+      const path = this.linesGroup.append('path')
         .datum(this.data)
         .attr('class', `line line-${s.key}`)
         .attr('fill', 'none')
@@ -276,7 +287,7 @@ export default class AnimationLineChart {
       return; // ラインが既に表示済み(アニメーション済み)の場合は何もしない
     }
 
-    const path = this.g.select(`.line-${lineKey}`);
+    const path = this.linesGroup.select(`.line-${lineKey}`);
     if (path.empty()) {
       console.warn(`キーが ${lineKey} のラインが見つかりません。`);
       return;
@@ -301,7 +312,7 @@ export default class AnimationLineChart {
    * @param {string} lineKey - seriesで定義されたキー
    */
   resetLine(lineKey) {
-    const path = this.g.select(`.line-${lineKey}`);
+    const path = this.linesGroup.select(`.line-${lineKey}`);
     if (path.empty()) {
       console.warn(`キーが ${lineKey} のラインが見つかりません。`);
       return;
@@ -365,7 +376,7 @@ export default class AnimationLineChart {
 
     // ラインとラベルを状態に応じて更新
     this.series.forEach(s => {
-      const path = this.g.select(`.line-${s.key}`);
+      const path = this.linesGroup.select(`.line-${s.key}`);
       const isHidden = path.attr('stroke-dasharray') && parseFloat(path.attr('stroke-dashoffset')) > 0;
 
 
