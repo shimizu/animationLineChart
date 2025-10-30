@@ -35,8 +35,8 @@ export default class AnimationLineChart {
     // デフォルト設定
     const defaults = {
       margin: { top: 30, right: 30, bottom: 30, left: 50 },
-      xDomain: [1990, 2024],
-      yDomain: [0, 50],
+      xDomain: [],
+      yDomain: [],
       dataUrl: null,
       series: []
     };

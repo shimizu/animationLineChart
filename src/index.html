@@ -6,10 +6,14 @@
     <title>preJS minimum template</title>
 </head>
 <body>
-    <button id="animateButton">Run Animation</button>
-    <button id="toggleX">Toggle X-Axis</button>
-    <button id="toggleY">Toggle Y-Axis</button>
-    <div id="lineChart"></div>
+    <div class="controls">
+        <button id="animateButton" class="btn btn-primary">アニメーション実行</button>
+        <button id="toggleX" class="btn btn-secondary">X軸範囲切替</button>
+        <button id="toggleY" class="btn btn-secondary">Y軸範囲切替</button>
+    </div>
+    <div class="chart-container">
+        <div id="lineChart"></div>
+    </div>
     <script type="module" src="/index.js"></script>
 </body>
 </html>

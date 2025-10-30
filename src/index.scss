@@ -1,41 +1,175 @@
+// リセットとベースレイアウト
 html, body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
-  font-family: sans-serif;
-  overflow-y: scroll;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+// コントロールエリア
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// ボタンスタイル
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 6px 12px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(145deg, #667eea, #764ba2);
+  color: white;
+  
+  &:hover {
+    background: linear-gradient(145deg, #5a6fd8, #6a4190);
+  }
+}
+
+.btn-secondary {
+  background: linear-gradient(145deg, #89f7fe, #66a6ff);
+  color: white;
+  
+  &:hover {
+    background: linear-gradient(145deg, #77e5ec, #5494dd);
+  }
+}
+
+// チャートコンテナ
+.chart-container {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  min-height: 0; // フレックスボックスでの縮小を許可
 }
 
 #lineChart {
   width: 100%;
   height: 100%;
+  min-height: 400px;
 }
 
+// D3.js軸とグリッドのスタイル
 .x-axis path,
 .y-axis path {
-  stroke: #333;
+  stroke: #4a5568;
+  stroke-width: 1.5px;
 }
 
 .x-axis .tick line,
 .y-axis .tick line {
-  stroke: #ccc;
+  stroke: #a0aec0;
+  stroke-width: 1px;
 }
 
 .x-axis .tick text,
 .y-axis .tick text {
-  fill: #333;
+  fill: #2d3748;
   font-size: 12px;
+  font-weight: 500;
 }
 
 .x-grid .tick line,
 .y-grid .tick line {
-  stroke: #e0e0e0;
-  stroke-opacity: 0.7;
+  stroke: #e2e8f0;
+  stroke-opacity: 0.8;
+  stroke-width: 1px;
 }
 
 .line {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 3px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+// レスポンシブデザイン
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 100%;
+  }
+  
+  .chart-container {
+    padding: 20px;
+  }
+  
+  #lineChart {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    padding: 15px;
+  }
+  
+  #lineChart {
+    min-height: 250px;
+  }
 }

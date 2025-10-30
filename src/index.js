@@ -3,15 +3,15 @@ import AnimationLineChart from './animationLineChart.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const chartOptions = {
+      margin: { top: 30, right: 30, bottom: 30, left: 60 },
       dataUrl: './data/example.csv',
       series: [
-        { key: 'USA', label: 'USA', color: '#e41a1c' },
-        { key: 'China', label: 'China', color: '#377eb8' },
-        { key: 'Japan', label: 'Japan', color: '#4daf4a' },
-        { key: 'Germany', label: 'Germany', color: '#984ea3' }
+        { key: 'イギリス', label: 'イギリス', color: '#e41a1c' },
+        { key: 'カナダ', label: 'カナダ', color: '#377eb8' },
+        { key: '米国', label: '米国', color: '#4daf4a' },
       ],
-      xDomain: [2000, 2023],
-      yDomain: [0, 220]
+      xDomain: [1990, 2023],
+      yDomain: [0, 225000]
     };
 
     // チャートインスタンス作成
@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     let yState = 'default';
 
     const xDomains = {
-        default: [2000, 2023],
+        default: [1990, 2023],
         zoomed: [2010, 2020]
     };
 
     const yDomains = {
-        default: [0, 220],
-        zoomed: [50, 150]
+        default: [0, 225000],
+        zoomed: [0, 80000]
     };
 
     toggleXButton.addEventListener('click', () => {
