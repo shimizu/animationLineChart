@@ -1,6 +1,9 @@
-# preJS minimum template
+# animationLineCHart
 
-preJSプロジェクトのミニマムテンプレート
+アニメーション機能付きのラインチャート
+
++ リサイズ二対応
++ axisの変化に対応
 
 ## インストール
 
